@@ -1,0 +1,14 @@
+services:
+  owlix-ha-addon:
+    build: .
+    image: owlix-ha-addon:latest
+    container_name: owlix-ha-addon
+    host_network: true
+    # สำหรับทดสอบ: ส่ง token ผ่าน env หรือ mount options.json
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN:-}
+      - CONFIG_PATH=/data/options.json
+    volumes:
+      # จำลองโฟลเดอร์ options ของ HA (สร้าง options.json ใส่ token สำหรับทดสอบ)
+      - ./data:/data:ro
+    restart: unless-stopped
