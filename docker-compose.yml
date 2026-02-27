@@ -3,7 +3,8 @@ services:
     build: .
     image: owlix-ha-addon:latest
     container_name: owlix-ha-addon
-    host_network: true
+    network_mode: host
+    restart: unless-stopped
     # สำหรับทดสอบ: ส่ง token ผ่าน env หรือ mount options.json
     environment:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN:-}
